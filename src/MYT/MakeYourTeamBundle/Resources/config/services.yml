@@ -1,0 +1,5 @@
+services:
+    make_your_team.registration.form.type:
+        class: MYT\MakeYourTeamBundle\Form\Type\RegistrationFormType
+        tags:
+            - { name: form.type, alias: myt_user_registration }

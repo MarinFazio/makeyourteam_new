@@ -1,0 +1,79 @@
+{% block fos_user_content %}
+    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'control-label form-label'}}) }}
+                {{ form_errors(form.email) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez votre adresse email'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+                {{ form_label(form.username, 'Nom d\'utilisateur', {'label_attr': {'class': 'control-label form-label'}}) }}
+                {{ form_errors(form.username) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez votre nom d\'utilisateur'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+                {{ form_label(form.plainPassword.first, 'Mot de passe', {'label_attr': {'class': 'control-label form-label'}}) }}
+                {{ form_errors(form.plainPassword.first) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez votre mot de passe'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+                {{ form_label(form.plainPassword.second, 'Confirmez votre mot de passe', {'label_attr': {'class': 'control-label form-label'}}) }}
+                {{ form_errors(form.plainPassword.second) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'Confirmez votre mot de passe'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+                {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'control-label form-label'}}) }}
+                {{ form_errors(form.nom) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Votre nom'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+                {{ form_label(form.prenom, 'Prenom', {'label_attr': {'class': 'control-label form-label'}}) }}
+                {{ form_errors(form.prenom) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Votre prenom'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+            {{ form_label(form.age, 'Âge', {'label_attr': {'class': 'control-label form-label'}}) }}
+                {{ form_errors(form.age) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.age, {'attr': {'class': 'form-control', 'placeholder': 'Votre age'}}) }}
+            </div>
+        </div>
+
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="{{ 'Valider'|trans }}" />
+        </div>
+    </form>
+{% endblock %}
