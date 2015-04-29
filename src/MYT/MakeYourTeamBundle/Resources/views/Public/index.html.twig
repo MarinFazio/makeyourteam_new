@@ -1,12 +1,10 @@
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Accueil</title>
-</head>
-<body>
+{% extends "::base.html.twig" %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
     <h1>Accueil de mon site</h1>
-    <a href="{{ path('fos_user_registration_register') }}">- S'inscrire</a>
-    <a href="{{ path('fos_user_security_login') }}">- Se connecter</a>
+
 
     <span><a href="{{ path('annonce_add') }}">Ajouter une annonce</a></span>
 
@@ -44,5 +42,6 @@
         {% endfor %}
     </div>
 
-</body>
-</html>
+{% endblock %}
+
+{#{% block %}#}
