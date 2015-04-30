@@ -1,0 +1,28 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+
+    <h1>Mon profil</h1>
+    <br/>
+    <a href="{{ path('home') }}">Retourner à l'accueil</a>
+    <br/>
+    <div class="id_user">
+        <p>{{ 'Nom d\'utilisateur'|trans }}: {{ user.username }}</p>
+        <p>{{ 'Email'|trans }}: {{ user.email }}</p>
+    </div>
+
+    <div id="photo_profil">
+        <img src="" alt="Photo non disponible"/>
+    </div>
+
+    <div id="mes_competences">
+        <h3>Mes Compétences</h3>
+    </div>
+
+    <div id="ma_description">
+        <h3>Ma Description</h3>
+    </div>
+
+{% endblock %}

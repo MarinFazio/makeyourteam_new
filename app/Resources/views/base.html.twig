@@ -6,6 +6,7 @@
         {% block stylesheets %}
             {% stylesheets '@MakeYourTeamBundle/Resources/public/css/bootstrap/*'
                            '@MakeYourTeamBundle/Resources/public/css/perso/login_bar_style.css'
+                           '@MakeYourTeamBundle/Resources/public/css/perso/general.css'
             filter= 'cssrewrite'%}
             <link rel="stylesheet" href="{{ asset_url }}"/>
             {% endstylesheets %}
@@ -13,35 +14,53 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-    <div id="wrap">
-        <div id="regbar">
-            <div id="navthing">
-                {% if user is not null %}
-                    <h2><a href="{{ path("fos_user_security_logout") }}">Se déconnecter</a></h2>
-                {% else %}
-                    <h2><a href="#" id="loginform">Se connecter</a> | <a href="{{ path('fos_user_registration_register') }}">S'inscrire</a></h2>
-                {% endif %}
-                {#<h2><a href="#" id="loginform">Login</a> | <a href="#">Register</a></h2>#}
-                <div class="login">
-                    <div class="arrow-up"></div>
-                    <div class="formholder">
-                        <div class="randompad">
-                            <fieldset>
-                                <form action="{{ path("fos_user_security_check") }}" method="post">
-                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                                    <label for="username">{{ 'Nom d\'utilisateur'|trans }}</label>
-                                    <input type="text" id="username" name="_username" required="required" placeholder="Nom d'utilisateur"/>
-                                    <label for="password">{{ 'Mot de passe'|trans }}</label>
-                                    <input type="password" id="password" name="_password" required="required" placeholder="Mot de passe"/>
-                                    <input type="submit" value="Se connecter" />
-                                </form>
-                            </fieldset>
+    {# --------------- TOP BAR --------------- #}
+    <header>
+        <div id="wrap">
+            <div id="regbar">
+                <div id="navthing">
+                    {% if user is not null %}
+                        <h4><a href="{{ path('fos_user_profile_show') }}">Mon compte</a> | <a href="{{ path("fos_user_security_logout") }}">Se déconnecter</a></h4>
+                    {% else %}
+                        <h4><a href="#" id="loginform">Se connecter</a> | <a href="{{ path('fos_user_registration_register') }}">S'inscrire</a></h4>
+                    {% endif %}
+                    {#<h2><a href="#" id="loginform">Login</a> | <a href="#">Register</a></h2>#}
+                    <div class="login">
+                        <div class="arrow-up"></div>
+                        <div class="formholder">
+                            <div class="randompad">
+                                <fieldset>
+                                    {# ---------- Formulaire de connexion ---------- #}
+                                    <form action="{{ path("fos_user_security_check") }}" method="post">
+                                        <input type="hidden" name="_csrf_token" value="{% if csrf_token is defined %}{{ csrf_token }}{% endif %}" />
+                                        <label for="username">{{ 'Nom d\'utilisateur'|trans }}</label>
+                                        <input type="text" id="username" name="_username" value="{% if last_username is defined %}{{ last_username }}{% endif %}" required="required" placeholder="Nom d'utilisateur"/>
+                                        <label for="password">{{ 'Mot de passe'|trans }}</label>
+                                        <input type="password" id="password" name="_password" required="required" placeholder="Mot de passe"/>
+                                        <label class="label_input" for="remember_me">{{ 'Se souvenir de moi'|trans }}&nbsp;&nbsp;&nbsp;</label>
+                                        <input style="margin-bottom: 8px" type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                        <input type="submit" value="Se connecter" />
+                                    </form>
+                                    {# ---------- Fin formulaire de connexion ---------- #}
+                                </fieldset>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </header>
+    {# --------------- END TOP BAR --------------- #}
+
+    {% if error is defined %}
+        {% if error is not null %}
+            <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Attention!</strong> Votre nom d'utilisateur ou votre mot de passe est incorrect.
+            </div>
+        {% endif %}
+    {% endif %}
+
         {% block body %}{% endblock %}
         {% block javascripts %}
             {% javascripts '@MakeYourTeamBundle/Resources/public/js/*' %}

@@ -7,40 +7,48 @@
 
 
     <span><a href="{{ path('annonce_add') }}">Ajouter une annonce</a></span>
-
-    <div class="list-annonces">
-        {% for annonce in annonces %}
-            <article>
-                <header>
-                    <h1>{{ annonce.titre }}</h1>
-                    <p>Publié le : {{ annonce.cdate|date('d/m/Y') }}, par {{ annonce.auteur }} </p>
-                </header>
-                <p>
-                    {# On vérifie qu'une image soit bien associée à l'annonce #}
-                    {% if annonce.image is not null %}
-                        <img src="{{ asset(annonce.image.webPath) }}" alt="{{ annonce.image.alt }}" height="150"/>
-                    {% endif %}
-                    {{ annonce.contenu }}
-                </p>
-                <span>
-                    <a href="{{ path('annonce_edit', {'slug': annonce.slug}) }}">Modifier</a>
-                    <a href="{{ path('annonce_delete', {'id': annonce.id}) }}">Supprimer</a>
-                </span>
-
-                {#{% if listCompetenceAnnonce|length > 0 %}#}
-                {#<div>#}
-                    {#Cette annonce requiert les compétences suivantes :#}
-                    {#<ul>#}
-                        {#{% for annonceCompetence in listCompetenceAnnonce %}#}
-                            {#<li>{{ annonceCompetence.competence.nom }} : niveau {{ annonceCompetence.niveau }}</li>#}
-                        {#{% endfor %}#}
-                    {#</ul>#}
-                {#</div>#}
-                {#{% endif %}#}
-            </article>
-            <br/>
-        {% endfor %}
+    <br/>
+    <div id="search">
+        <label for="recherche_annonce" class="label_input">Rechercher</label><input type="search" id="recherche_annonce" placeholder="Rechercher.."/>
     </div>
+
+    {% if annonces is defined %}
+        <div class="list-annonces">
+            {% for annonce in annonces %}
+                <article>
+                    <header>
+                        <h3>{{ annonce.titre }}</h3>
+                        <p>Publié le : {{ annonce.cdate|date('d-m-Y') }}, par {{ annonce.auteur }} </p>
+                    </header>
+                    <p>
+                        {# On vérifie qu'une image soit bien associée à l'annonce #}
+                        {% if annonce.image is not null %}
+                            <img src="{{ asset(annonce.image.webPath) }}" alt="{{ annonce.image.alt }}" height="150"/>
+                        {% endif %}
+                        {{ annonce.contenu }}
+                    </p>
+                    <span>
+                        <a href="{{ path('annonce_edit', {'slug': annonce.slug}) }}">Modifier</a>
+                        <a href="{{ path('annonce_delete', {'id': annonce.id}) }}">Supprimer</a>
+                    </span>
+
+                    {#{% if listCompetenceAnnonce|length > 0 %}#}
+                    {#<div>#}
+                        {#Cette annonce requiert les compétences suivantes :#}
+                        {#<ul>#}
+                            {#{% for annonceCompetence in listCompetenceAnnonce %}#}
+                                {#<li>{{ annonceCompetence.competence.nom }} : niveau {{ annonceCompetence.niveau }}</li>#}
+                            {#{% endfor %}#}
+                        {#</ul>#}
+                    {#</div>#}
+                    {#{% endif %}#}
+                </article>
+                <br/>
+                <hr/>
+                <br/>
+            {% endfor %}
+        </div>
+    {% endif %}
 
 {% endblock %}
 

@@ -16,14 +16,16 @@ body {
 
 #regbar {
   height: 67px;
-  background: #34495e;
+  background: #00b9ff;
 }
 
 #navthing {
-  margin-left: 50px;
+  /*margin-left: 50px;*/
+  /*margin-left: 75%;*/
+  float: right;
 }
 
-h2 {
+h4 {
   padding: 20px;
   color: #ecf0f1;
 }
@@ -94,10 +96,10 @@ fieldset {
   color: #1abc9c;
 }
 
-a {
+#navthing a {
   color: #ecf0f1;
   text-decoration: none;
 }
-a:hover {
-  color: #1abc9c;
+#navthing a:hover {
+  color: #0006bc;
 }

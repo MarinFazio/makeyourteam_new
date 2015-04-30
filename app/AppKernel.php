@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new MYT\MakeYourTeamBundle\MakeYourTeamBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new MYT\UserBundle\UserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
