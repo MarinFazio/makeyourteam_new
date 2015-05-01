@@ -3,35 +3,45 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <h1>Accueil de mon site</h1>
+    <h1>Accueil</h1>
 
-
-    <span><a href="{{ path('annonce_add') }}">Ajouter une annonce</a></span>
-    <br/>
+    {#{% if is_granted("IS_AUTHENTICATED_FULLY") %}#}
+        <span><a href="{{ path('annonce_add') }}">Poster une annonce</a></span>
+        <br/>
+    {#{% endif %}#}
     <div id="search">
-        <label for="recherche_annonce" class="label_input">Rechercher</label><input type="search" id="recherche_annonce" placeholder="Rechercher.."/>
+        <input type="search" id="recherche_annonce" placeholder="Rechercher.."/><button id="button_recherche_annonce" class="btn btn-bg">Rechercher</button>
     </div>
+    <br/>
+    <br/>
 
     {% if annonces is defined %}
         <div class="list-annonces">
             {% for annonce in annonces %}
-                <article>
+                <article class="annonce">
                     <header>
                         <h3>{{ annonce.titre }}</h3>
-                        <p>Publié le : {{ annonce.cdate|date('d-m-Y') }}, par {{ annonce.auteur }} </p>
                     </header>
-                    <p>
+                    <div>
                         {# On vérifie qu'une image soit bien associée à l'annonce #}
                         {% if annonce.image is not null %}
-                            <img src="{{ asset(annonce.image.webPath) }}" alt="{{ annonce.image.alt }}" height="150"/>
+                            <div class="img_annonce">
+                                <img src="{{ asset(annonce.image.webPath) }}" alt="{{ annonce.image.alt }}" height="150"/>
+                            </div>
                         {% endif %}
-                        {{ annonce.contenu }}
-                    </p>
-                    <span>
-                        <a href="{{ path('annonce_edit', {'slug': annonce.slug}) }}">Modifier</a>
-                        <a href="{{ path('annonce_delete', {'id': annonce.id}) }}">Supprimer</a>
-                    </span>
-
+                        <div class="contenu_annonce">
+                            <p>{{ annonce.contenu }}</p>
+                        </div>
+                    </div>
+                    {#<span>#}
+                        {#<a href="{{ path('annonce_edit', {'slug': annonce.slug}) }}">Modifier</a>#}
+                        {#<a href="{{ path('annonce_delete', {'id': annonce.id}) }}">Supprimer</a>#}
+                    {#</span>#}
+                    <footer>
+                        <div class="date_publication_annonce">
+                            <p>Publié le : {{ annonce.cdate|date('d-m-Y') }}, par {{ annonce.auteur }} </p>
+                        </div>
+                    </footer>
                     {#{% if listCompetenceAnnonce|length > 0 %}#}
                     {#<div>#}
                         {#Cette annonce requiert les compétences suivantes :#}
@@ -43,9 +53,6 @@
                     {#</div>#}
                     {#{% endif %}#}
                 </article>
-                <br/>
-                <hr/>
-                <br/>
             {% endfor %}
         </div>
     {% endif %}
