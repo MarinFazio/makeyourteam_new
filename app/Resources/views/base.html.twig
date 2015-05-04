@@ -19,7 +19,7 @@
         <div id="wrap">
             <div id="regbar">
                 <div id="navthing">
-                    {% if user is not null %}
+                    {% if user is defined %}
                         <h4><a href="{{ path('fos_user_profile_show') }}">Mon compte</a> | <a href="{{ path("fos_user_security_logout") }}">Se déconnecter</a></h4>
                     {% else %}
                         <h4><a href="#" id="loginform">Se connecter</a> | <a href="{{ path('fos_user_registration_register') }}">S'inscrire</a></h4>

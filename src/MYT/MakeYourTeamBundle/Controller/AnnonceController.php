@@ -18,6 +18,7 @@ class AnnonceController extends Controller
     {
         $annonce = new Annonce();
         $form = $this->createForm(new AnnonceType(), $annonce);
+        $user = $this->get('session')->get('user');
 
         $_request = $this->getRequest();
         if($_request->getMethod() == 'POST'){
@@ -64,11 +65,13 @@ class AnnonceController extends Controller
         }
         return $this->render("MakeYourTeamBundle:Annonce:add.html.twig", array(
             'form' => $form->createView(),
+            'user' => $user,
         ));
     }
 
     public function editAction($slug, Request $request)
     {
+        $user = $this->get('session')->get('user');
         $em = $this->getDoctrine()->getManager();
         $annonceRepository = $em->getRepository('MakeYourTeamBundle:Annonce');
         $annonce = $annonceRepository->findOneBySlug($slug);
@@ -92,6 +95,7 @@ class AnnonceController extends Controller
         }
         return $this->render("MakeYourTeamBundle:Annonce:edit.html.twig", array(
             'form' => $form->createView(),
+            'user' => $user,
         ));
     }
 
@@ -99,6 +103,7 @@ class AnnonceController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $annonce = $em->getRepository('MakeYourTeamBundle:Annonce')->find($id);
+        $user = $this->get('session')->get('user');
 
         $form = $this->createFormBuilder()->getForm();
         $form->handleRequest($request);
@@ -120,7 +125,24 @@ class AnnonceController extends Controller
         // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
         return $this->render('MakeYourTeamBundle:Annonce:delete.html.twig', array(
             'annonce' => $annonce,
-            'form'    => $form->createView()
+            'form'    => $form->createView(),
+            'user'    => $user,
+        ));
+    }
+
+    public function showAction($slug){
+        $em = $this->getDoctrine()->getManager();
+        $annonce_repository = $em->getRepository('MakeYourTeamBundle:Annonce');
+        $annonce = $annonce_repository->findOneBySlug($slug);
+        if($annonce === null){
+            throw new NotFoundHttpException("L'annonce de slug \"$slug\" n'existe pas");
+        }
+
+        $user = $this->get('session')->get('user');
+
+        return $this->render('MakeYourTeamBundle:Annonce:show.html.twig', array(
+            'annonce'       => $annonce,
+            'user'          => $user,
         ));
     }
 

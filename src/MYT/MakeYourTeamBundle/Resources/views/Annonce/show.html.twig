@@ -1,0 +1,36 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Annonce{% endblock %}
+
+{% block body %}
+    <a href="{{ path('home') }}">Retour à l'accueil</a>
+    {% if is_granted("IS_AUTHENTICATED_FULLY") or is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <article>
+            <header>
+                <h3>{{ annonce.titre }}</h3>
+            </header>
+
+            <div>
+                {# On vérifie qu'une image soit bien associée à l'annonce #}
+                {% if annonce.image is not null %}
+                    <div class="img_annonce">
+                        <img src="{{ asset(annonce.image.webPath) }}" alt="{{ annonce.image.alt }}" height="150"/>
+                    </div>
+                {% endif %}
+                <div class="contenu_annonce">
+                    <p>{{ annonce.contenu }}</p>
+                </div>
+            </div>
+
+            <footer>
+                <div class="date_publication_annonce">
+                    <p>Publié le : {{ annonce.cdate|date('d-m-Y') }}, par {{ annonce.auteur }} </p>
+                </div>
+            </footer>
+
+        </article>
+    {% else %}
+        <p>Pour accéder à l'annonce vous devez vous connecter</p>
+        <p><a href="">S'inscire</a>&nbsp;&nbsp;&nbsp;<a href="">Se connecter</a>&nbsp;&nbsp;&nbsp;<a href="{{ path('home') }}">Retour à l'accueil</a></p>
+    {% endif %}
+{% endblock %}

@@ -9,6 +9,15 @@
     border-left: hidden;
     border-right: hidden;
     border-collapse: collapse;
+    margin-top: -1px;
+}
+
+.annonce_left{
+    background-color: antiquewhite;
+}
+
+.annonce_right{
+    background-color: #ffffee;
 }
 
 body{
@@ -37,8 +46,7 @@ body{
     /*-webkit-box-sizing: border-box;*/
 }
 
-.img_annonce{
-    /*float: left;*/
+.img_annonce_left{
     width: 200px;
     height: 200px;
     overflow: auto;
@@ -47,7 +55,17 @@ body{
     margin-top: 15px;
 }
 
-.contenu_annonce{
+.img_annonce_right{
+    width: 200px;
+    height: 200px;
+    overflow: auto;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 15px;
+    margin-left: 84%;
+}
+
+.contenu_annonce_left{
     display: inline-block;
     vertical-align: top;
     margin-left: 20px;
@@ -55,8 +73,12 @@ body{
     margin-top: 15px;
 }
 
+.titre_annonce_left{
+    float: left;
+}
+
 .date_publication_annonce{
-    float: right;
-    vertical-align: bottom;
-    display: inline-block;
+    /*float: right;*/
+    /*vertical-align: bottom;*/
+    /*display: inline-block;*/
 }

@@ -24,16 +24,20 @@ class PublicController extends Controller
 
         $annonces = $annonceRepository->findAll();
 
+        $lastIndex = @array_pop(array_keys($annonces));
+
         $user = $this->getUser();
+        $this->get('session')->set('user', $user);
 
         $csrfToken = $this->has('form.csrf_provider')? $this->get('form.csrf_provider')->generateCsrfToken('authenticate') : null;
 
         return $this->render("MakeYourTeamBundle:Public:index.html.twig", array(
-            'annonces'              => $annonces,
-            'user'                  => $user,
-            'csrf_token'            => $csrfToken,
-            'last_username'         => $lastUsername,
-            'error'                 => $error,
+            'annonces'          => $annonces,
+            'user'              => $user,
+            'csrf_token'        => $csrfToken,
+            'last_username'     => $lastUsername,
+            'error'             => $error,
+            'lastIndex'         => $lastIndex,
         ));
 
     }

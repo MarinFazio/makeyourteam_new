@@ -3,7 +3,7 @@ home:
     defaults: { _controller: MakeYourTeamBundle:Public:index }
 
 annonce_page:
-    pattern: /page/{page}
+    pattern: /page-{page}
     defaults: { _controller: MakeYourTeamBundle:Annonce:page }
     requirements:
         page: \d
@@ -17,9 +17,13 @@ annonce_add:
     defaults: { _controller: MakeYourTeamBundle:Annonce:add }
 
 annonce_edit:
-    pattern: /annonce/edit/{slug}
-    defaults: { _controller:MakeYourTeamBundle:Annonce:edit }
+    pattern: /annonce/edit-{slug}
+    defaults: { _controller: MakeYourTeamBundle:Annonce:edit }
 
 annonce_delete:
-    pattern: /annonce/delete/{id}
-    defaults: { _controller:MakeYourTeamBundle:Annonce:delete }
+    pattern: /annonce/delete-{id}
+    defaults: { _controller: MakeYourTeamBundle:Annonce:delete }
+
+myt_annonce_show:
+    pattern: /annonce/show-{slug}
+    defaults: { _controller: MakeYourTeamBundle:Annonce:show }
