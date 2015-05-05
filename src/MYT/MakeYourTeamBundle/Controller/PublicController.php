@@ -28,6 +28,9 @@ class PublicController extends Controller
 
         $user = $this->getUser();
         $this->get('session')->set('user', $user);
+//        $this->get('security.context')->getToken()->isAuthenticated();
+//        var_dump($this->get('security.context')->getToken()->getUser());die;
+
 
         $csrfToken = $this->has('form.csrf_provider')? $this->get('form.csrf_provider')->generateCsrfToken('authenticate') : null;
 

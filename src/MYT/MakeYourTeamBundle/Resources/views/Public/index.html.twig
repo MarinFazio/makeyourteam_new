@@ -5,10 +5,11 @@
 {% block body %}
     <h1>Accueil</h1>
 
-    {#{% if is_granted("IS_AUTHENTICATED_FULLY") %}#}
+    {% if is_granted("IS_AUTHENTICATED_FULLY") or is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    {#{% if user is defined %}#}
         <span><a href="{{ path('annonce_add') }}">Poster une annonce</a></span>
         <br/>
-    {#{% endif %}#}
+    {% endif %}
     <div id="search">
         <input type="search" id="recherche_annonce" placeholder="Rechercher.."/><button id="button_recherche_annonce" class="btn btn-bg">Rechercher</button>
     </div>
@@ -23,15 +24,27 @@
                         <h3><a href="{{ path('myt_annonce_show', {'slug': annonce.slug}) }}">{{ annonce.titre }}</a></h3>
                     </header>
                     <div>
-                        {# On vérifie qu'une image soit bien associée à l'annonce #}
-                        {% if annonce.image is not null %}
-                            <div class="{% if key==0 or key is divisible by(2) %}img_annonce_left{% else %}img_annonce_right{% endif %}">
-                                <img src="{{ asset(annonce.image.webPath) }}" alt="{{ annonce.image.alt }}" height="150"/>
+                        {% if key==0 or key is divisible by(2) %}
+                            {# On vérifie qu'une image soit bien associée à l'annonce #}
+                            {% if annonce.image is not null %}
+                                <div class="{% if key==0 or key is divisible by(2) %}img_annonce_left{% else %}img_annonce_right{% endif %}">
+                                    <img src="{{ asset(annonce.image.webPath) }}" alt="{{ annonce.image.alt }}" height="150"/>
+                                </div>
+                            {% endif %}
+                            <div class="{% if key==0 or key is divisible by(2) %}contenu_annonce_left{% else %}contenu_annonce_right{% endif %}">
+                                <p>{{ annonce.contenu }}</p>
                             </div>
+                        {% else %}
+                            <div class="{% if key==0 or key is divisible by(2) %}contenu_annonce_left{% else %}contenu_annonce_right{% endif %}">
+                                <div>{{ annonce.contenu|raw }}</div>
+                            </div>
+                            {# On vérifie qu'une image soit bien associée à l'annonce #}
+                            {% if annonce.image is not null %}
+                                <div class="{% if key==0 or key is divisible by(2) %}img_annonce_left{% else %}img_annonce_right{% endif %}">
+                                    <img src="{{ asset(annonce.image.webPath) }}" alt="{{ annonce.image.alt }}" height="150"/>
+                                </div>
+                            {% endif %}
                         {% endif %}
-                        <div class="{% if key==0 or key is divisible by(2) %}contenu_annonce_left{% else %}contenu_annonce_right{% endif %}">
-                            <p>{{ annonce.contenu }}</p>
-                        </div>
                     </div>
                     {#<span>#}
                         {#<a href="{{ path('annonce_edit', {'slug': annonce.slug}) }}">Modifier</a>#}
@@ -39,7 +52,7 @@
                     {#</span>#}
                     <footer>
                         <div class="date_publication_annonce">
-                            <p>Publié le : {{ annonce.cdate|date('d-m-Y') }}, par {{ annonce.auteur }} </p>
+                            <p>Publication le : {{ annonce.cdate|date('d-m-Y') }}, par {{ annonce.auteur }} </p>
                         </div>
                     </footer>
                     {#{% if listCompetenceAnnonce|length > 0 %}#}

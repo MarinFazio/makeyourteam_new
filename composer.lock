@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "156b733795436c15ef847a865c354be7",
+    "hash": "84aa521ca34ec9073a2ddff44ed0aebe",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -806,6 +806,50 @@
                 "orm"
             ],
             "time": "2015-04-02 20:40:18"
+        },
+        {
+            "name": "ezyang/htmlpurifier",
+            "version": "v4.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezyang/htmlpurifier.git",
+                "reference": "6f389f0f25b90d0b495308efcfa073981177f0fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/6f389f0f25b90d0b495308efcfa073981177f0fd",
+                "reference": "6f389f0f25b90d0b495308efcfa073981177f0fd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
+                "files": [
+                    "library/HTMLPurifier.composer.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Edward Z. Yang",
+                    "email": "admin@htmlpurifier.org",
+                    "homepage": "http://ezyang.com"
+                }
+            ],
+            "description": "Standards compliant HTML filter written in PHP",
+            "homepage": "http://htmlpurifier.org/",
+            "keywords": [
+                "html"
+            ],
+            "time": "2013-11-30 08:25:19"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -1806,6 +1850,61 @@
                 "framework"
             ],
             "time": "2015-04-01 16:00:43"
+        },
+        {
+            "name": "trsteel/ckeditor-bundle",
+            "version": "v1.6.2",
+            "target-dir": "Trsteel/CkeditorBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/trsteel88/TrsteelCkeditorBundle.git",
+                "reference": "20bef04800e800fcebf99045fb827d43c0ede404"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/trsteel88/TrsteelCkeditorBundle/zipball/20bef04800e800fcebf99045fb827d43c0ede404",
+                "reference": "20bef04800e800fcebf99045fb827d43c0ede404",
+                "shasum": ""
+            },
+            "require": {
+                "ezyang/htmlpurifier": "~4.0",
+                "php": ">=5.3.0",
+                "symfony/form": ">=2.1,<2.7",
+                "symfony/framework-bundle": "2.*,<2.7",
+                "twig/twig": ">=1.1,<2.0"
+            },
+            "require-dev": {
+                "symfony/twig-bundle": "2.*,<2.7",
+                "symfony/yaml": "~2.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Trsteel\\CkeditorBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Trent Steel",
+                    "email": "trsteel88@gmail.com"
+                }
+            ],
+            "description": "Symfony2 bundle for easy integration of the CKEditor WYSIWYG",
+            "keywords": [
+                "CKEditor",
+                "editor",
+                "wysiwyg"
+            ],
+            "time": "2015-04-27 22:55:09"
         },
         {
             "name": "twig/extensions",

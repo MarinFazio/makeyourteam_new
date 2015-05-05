@@ -16,7 +16,16 @@ class AnnonceType extends AbstractType
     {
         $builder
             ->add('titre', 'text')
-            ->add('contenu', 'textarea')
+            ->add('contenu', 'ckeditor', array(
+                'transformers'                 => array('html_purifier'),
+//                'toolbar_groups'               => array(
+//                    'document' => array('Source')
+//                ),
+                'startup_outline_blocks'       => false,
+                'width'                        => '75%',
+                'height'                       => '250',
+                'language'                     => 'fr',
+            ))
             ->add('published', 'checkbox', array('required' => false))
             ->add('image' , new ImageType())
             ->add('categorie', 'entity', array(

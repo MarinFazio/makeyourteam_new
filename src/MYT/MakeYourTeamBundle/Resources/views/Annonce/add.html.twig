@@ -3,8 +3,8 @@
 {% block title %}Ajouter une annonce{% endblock %}
 
 {% block stylesheets %}
+    {{ parent() }}
     {% stylesheets
-        '@MakeYourTeamBundle/Resources/public/css/bootstrap/*'
         '@MakeYourTeamBundle/Resources/public/css/perso/form_style.css'
     filter= 'cssrewrite'%}
     <link rel="stylesheet" href="{{ asset_url }}"/>
@@ -12,69 +12,73 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Ajouter article</h1>
-    <br/>
-    <div class="formulaire">
-        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    {% if is_granted("IS_AUTHENTICATED_FULLY") or is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <h1>Ajouter article</h1>
+        <br/>
+        <div class="formulaire">
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
-        {# Les erreurs générales du formulaire #}
-        {{ form_errors(form) }}
+            {# Les erreurs générales du formulaire #}
+            {{ form_errors(form) }}
 
-        <div class="form-group form-field">
-            <div class="col-sm-3">
-                {{ form_label(form.titre, 'Titre de l\'annonce', {'label_attr': {'class': 'control-label form-label'}}) }}
-                {{ form_errors(form.titre) }}
+            <div class="form-group form-field">
+                <div class="col-sm-3">
+                    {{ form_label(form.titre, 'Titre de l\'annonce', {'label_attr': {'class': 'control-label form-label'}}) }}
+                    {{ form_errors(form.titre) }}
+                </div>
+                <div class="col-sm-4">
+                    {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+                </div>
             </div>
-            <div class="col-sm-4">
-                {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+
+            <div class="form-group form-field">
+                <div class="col-sm-3">
+                    {{ form_label(form.image, 'Ajouter un visuel', {'label_attr': {'class': 'control-label form-label'}}) }}
+                    {{ form_errors(form.image) }}
+                </div>
+                <div class="col-sm-4">
+                    {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                </div>
             </div>
+
+            <div class="form-group form-field">
+                <div class="col-sm-3">
+                    {{ form_label(form.categorie, 'Attribuer une catégorie', {'label_attr': {'class': 'control-label form-label'}}) }}
+                    {{ form_errors(form.categorie) }}
+                </div>
+                <div class="col-sm-4">
+                    {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group form-field">
+                <div class="col-sm-3">
+                    {{ form_label(form.published, 'Publier l\'annonce', {'label_attr': {'class': 'control-label form-label'}}) }}
+                    {{ form_errors(form.published) }}
+                </div>
+                <div class="col-sm-4">
+                    {{ form_widget(form.published, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group form-field">
+                <div class="col-sm-3">
+                    {{ form_label(form.contenu, 'Contenu de l\'annonce', {'label_attr': {'class': 'control-label form-label'}}) }}
+                    {{ form_errors(form.contenu) }}
+                </div>
+                <div class="col-sm-4">
+                    {{ form_widget(form.contenu, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            {{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-primary'}}) }}
+
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
         </div>
-
-        <div class="form-group form-field">
-            <div class="col-sm-3">
-                {{ form_label(form.contenu, 'Contenu de l\'annonce', {'label_attr': {'class': 'control-label form-label'}}) }}
-                {{ form_errors(form.contenu) }}
-            </div>
-            <div class="col-sm-4">
-                {{ form_widget(form.contenu, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-
-        <div class="form-group form-field">
-            <div class="col-sm-3">
-                {{ form_label(form.published, 'Publier l\'annonce', {'label_attr': {'class': 'control-label form-label'}}) }}
-                {{ form_errors(form.published) }}
-            </div>
-            <div class="col-sm-4">
-                {{ form_widget(form.published, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-
-        <div class="form-group form-field">
-            <div class="col-sm-3">
-                {{ form_label(form.image, 'Ajouter une image', {'label_attr': {'class': 'control-label form-label'}}) }}
-                {{ form_errors(form.image) }}
-            </div>
-            <div class="col-sm-4">
-                {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-
-        <div class="form-group form-field">
-            <div class="col-sm-3">
-                {{ form_label(form.categorie, 'Attribuer une catégorie', {'label_attr': {'class': 'control-label form-label'}}) }}
-                {{ form_errors(form.categorie) }}
-            </div>
-            <div class="col-sm-4">
-                {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-
-        {{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-primary'}}) }}
-
-        {{ form_rest(form) }}
-        {{ form_end(form) }}
-    </div>
+    {% else %}
+        <p>Pour poster une annonce vous devez être connecté : <a href="{{ path('home') }}">Retour à l'accueil</a></p>
+    {% endif %}
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript">
