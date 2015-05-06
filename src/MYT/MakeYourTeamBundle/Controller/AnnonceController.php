@@ -36,7 +36,7 @@ class AnnonceController extends Controller
                 $image->preUpload();
                 //Le persist pour l'image est exécuté en cascade
 
-                $annonce->setAuteur("auteur");
+                $annonce->setAuteur($user->getUsername());
 
                 // On récupère toutes les compétences
                 $listCompetence = $em->getRepository('MakeYourTeamBundle:Competence')->findAll();

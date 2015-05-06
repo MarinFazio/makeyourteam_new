@@ -53,6 +53,7 @@ body{
     vertical-align: top;
     margin-top: 15px;
     margin-left: 1%;
+    padding-bottom: 40px;
 }
 
 .contenu_annonce_left{
@@ -61,15 +62,18 @@ body{
     margin-left: 20px;
     overflow: auto;
     margin-top: 15px;
+    text-align: justify;
 }
 
 .titre_annonce_left{
     margin-left: 1%;
+    /*margin-top: 25px;*/
 }
 
 .titre_annonce_right{
     text-align: right;
     margin-right: 1%;
+    /*margin-bottom: 25px;*/
 }
 
 .img_annonce_right{
@@ -79,6 +83,7 @@ body{
     vertical-align: top;
     margin-top: 15px;
     margin-right: 1%;
+    padding-bottom: 40px;
 }
 
 .contenu_annonce_right{
@@ -91,10 +96,5 @@ body{
     width: 82%;
 }
 
-
-
-.date_publication_annonce{
-    /*float: right;*/
-    /*vertical-align: bottom;*/
-    /*display: inline-block;*/
+.date_publication_annonce_left{
 }

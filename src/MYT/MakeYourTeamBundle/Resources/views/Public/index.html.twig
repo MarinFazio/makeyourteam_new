@@ -32,7 +32,7 @@
                                 </div>
                             {% endif %}
                             <div class="{% if key==0 or key is divisible by(2) %}contenu_annonce_left{% else %}contenu_annonce_right{% endif %}">
-                                <p>{{ annonce.contenu }}</p>
+                                <p>{{ annonce.contenu|raw }}</p>
                             </div>
                         {% else %}
                             <div class="{% if key==0 or key is divisible by(2) %}contenu_annonce_left{% else %}contenu_annonce_right{% endif %}">
@@ -51,8 +51,8 @@
                         {#<a href="{{ path('annonce_delete', {'id': annonce.id}) }}">Supprimer</a>#}
                     {#</span>#}
                     <footer>
-                        <div class="date_publication_annonce">
-                            <p>Publication le : {{ annonce.cdate|date('d-m-Y') }}, par {{ annonce.auteur }} </p>
+                        <div class="{% if key==0 or key is divisible by(2) %}date_publication_annonce_left{% else %}date_publication_annonce_right{% endif %}">
+                            <p>Publication le : {{ annonce.cdate|date('d-m-Y') }}, par <a href="{{ path('fos_user_profile_show', {'username': annonce.auteur}) }}">{{ annonce.auteur }}</a></p>
                         </div>
                     </footer>
                     {#{% if listCompetenceAnnonce|length > 0 %}#}
