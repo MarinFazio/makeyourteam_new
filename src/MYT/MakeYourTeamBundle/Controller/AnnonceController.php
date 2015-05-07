@@ -39,19 +39,19 @@ class AnnonceController extends Controller
                 $annonce->setAuteur($user->getUsername());
 
                 // On récupère toutes les compétences
-                $listCompetence = $em->getRepository('MakeYourTeamBundle:Competence')->findAll();
+//                $listCompetence = $em->getRepository('MakeYourTeamBundle:Competence')->findAll();
 
                 // Pour chaque compétence
-                foreach ($listCompetence as $competence) {
+//                foreach ($listCompetence as $competence) {
                     // On crée une nouvelle « relation entre 1 annonce et 1 compétence »
-                    $annonceCompetence = new AnnonceCompetence();
+//                    $annonceCompetence = new AnnonceCompetence();
                     // On la lie à l'annonce, qui est ici toujours la même
-                    $annonceCompetence->setAnnonce($annonce);
+//                    $annonceCompetence->setAnnonce($annonce);
                     // On la lie à la compétence, qui change ici dans la boucle foreach
-                    $annonceCompetence->setCompetence($competence);
-                    $annonceCompetence->setNiveau('Expert');
-                    $em->persist($annonceCompetence);
-                }
+//                    $annonceCompetence->setCompetence($competence);
+//                    $annonceCompetence->setNiveau('Expert');
+//                    $em->persist($annonceCompetence);
+//                }
                 $em->persist($annonce);
                 $em->flush();
 
@@ -138,11 +138,19 @@ class AnnonceController extends Controller
             throw new NotFoundHttpException("L'annonce de slug \"$slug\" n'existe pas");
         }
 
+        $annonce_competence_repository = $em->getRepository('MakeYourTeamBundle:AnnonceCompetence');
+        $competences = $annonce_competence_repository->findBy(array('annonce' => $annonce->getId()));
+
+//        var_dump($competences);die;
+
+//        $competences = $annonce->getCompetence();
+
         $user = $this->get('session')->get('user');
 
         return $this->render('MakeYourTeamBundle:Annonce:show.html.twig', array(
             'annonce'       => $annonce,
             'user'          => $user,
+            'competences'   => $competences,
         ));
     }
 

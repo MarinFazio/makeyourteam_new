@@ -20,7 +20,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "stof/doctrine-extensions-bundle": "~1.1",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "Trsteel/ckeditor-bundle": "~1.6"
+        "Trsteel/ckeditor-bundle": "~1.6",
+        "doctrine/doctrine-fixtures-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

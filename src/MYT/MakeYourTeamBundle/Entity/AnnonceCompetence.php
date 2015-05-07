@@ -21,11 +21,11 @@ class AnnonceCompetence
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="niveau", type="string", length=255)
-     */
+//    /**
+//     * @var string
+//     *
+//    * @ORM\Column(name="niveau", type="string", length=255)
+//     */
     private $niveau;
 
     /**

@@ -2,6 +2,7 @@
 
 namespace MYT\MakeYourTeamBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -50,7 +51,7 @@ class Annonce
      *
      * @ORM\Column(name="published", type="boolean")
      */
-    private $published=true;
+    private $published = true;
 
     /**
      * @ORM\OneToOne(targetEntity="MYT\MakeYourTeamBundle\Entity\Image", cascade={"persist", "remove"})
@@ -86,17 +87,26 @@ class Annonce
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity="MYT\MakeYourTeamBundle\Entity\AnnonceCompetence", mappedBy="Annonce", cascade={"persist"})
+     * */
+    protected $annonceCompetence;
+
+    protected $competences;
+
 
     public function __construct()
     {
         $this->mdate = new \DateTime();
         $this->cdate = new \DateTime();
+        $this->annonceCompetence = new ArrayCollection();
+        $this->competences = new ArrayCollection();
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -119,7 +129,7 @@ class Annonce
     /**
      * Get titre
      *
-     * @return string 
+     * @return string
      */
     public function getTitre()
     {
@@ -142,14 +152,14 @@ class Annonce
     /**
      * Get contenu
      *
-     * @return string 
+     * @return string
      */
     public function getContenu()
     {
         return $this->contenu;
     }
 
-    
+
     /**
      * Set mdate
      *
@@ -166,7 +176,7 @@ class Annonce
     /**
      * Get mdate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getMdate()
     {
@@ -189,7 +199,7 @@ class Annonce
     /**
      * Get cdate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCdate()
     {
@@ -212,7 +222,7 @@ class Annonce
     /**
      * Get published
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPublished()
     {
@@ -235,7 +245,7 @@ class Annonce
     /**
      * Get image
      *
-     * @return \MYT\MakeYourTeamBundle\Entity\Image 
+     * @return \MYT\MakeYourTeamBundle\Entity\Image
      */
     public function getImage()
     {
@@ -275,7 +285,7 @@ class Annonce
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -298,7 +308,7 @@ class Annonce
     /**
      * Get auteur
      *
-     * @return string 
+     * @return string
      */
     public function getAuteur()
     {
@@ -321,10 +331,47 @@ class Annonce
     /**
      * Get categorie
      *
-     * @return \MYT\MakeYourTeamBundle\Entity\Categorie 
+     * @return \MYT\MakeYourTeamBundle\Entity\Categorie
      */
     public function getCategorie()
     {
         return $this->categorie;
     }
+
+    // Important
+    public function getCompetence()
+    {
+        $competences = new ArrayCollection();
+
+        foreach ($this->annonceCompetence as $ac) {
+            $competences[] = $ac->getCompetence();
+        }
+
+        return $competences;
+    }
+
+    // Important
+    public function setCompetence($competences)
+    {
+        foreach ($competences as $c) {
+            $ac = new AnnonceCompetence();
+
+            $ac->setAnnonce($this);
+            $ac->setCompetence($c);
+
+            $this->addAc($ac);
+        }
+
+    }
+
+    public function addAc($annonceCompetence)
+    {
+        $this->annonceCompetence[] = $annonceCompetence;
+    }
+
+    public function removeAc($annonceCompetence)
+    {
+        return $this->annonceCompetence->removeElement($annonceCompetence);
+    }
+
 }

@@ -18,9 +18,6 @@ class AnnonceType extends AbstractType
             ->add('titre', 'text')
             ->add('contenu', 'ckeditor', array(
                 'transformers'                 => array('html_purifier'),
-//                'toolbar_groups'               => array(
-//                    'document' => array('Source')
-//                ),
                 'startup_outline_blocks'       => false,
                 'width'                        => '75%',
                 'height'                       => '250',
@@ -32,6 +29,12 @@ class AnnonceType extends AbstractType
                 'class'     => 'MakeYourTeamBundle:Categorie',
                 'property'  => 'nom',
                 'multiple'  => false,
+            ))
+            ->add('competence', 'entity', array(
+                'class'     => 'MakeYourTeamBundle:Competence',
+                'property'  => 'nom',
+//                'expanded'  => true ,
+                'multiple'  => true,
             ))
             ->add('enregistrer', 'submit')
         ;

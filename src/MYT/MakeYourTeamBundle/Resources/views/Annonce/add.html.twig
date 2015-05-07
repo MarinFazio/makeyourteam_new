@@ -53,6 +53,16 @@
 
             <div class="form-group form-field">
                 <div class="col-sm-3">
+                    {{ form_label(form.competence, 'Choisir des compétences', {'label_attr': {'class': 'control-label form-label'}}) }}
+                    {{ form_errors(form.competence) }}
+                </div>
+                <div class="col-sm-4">
+                    {{ form_widget(form.competence, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group form-field">
+                <div class="col-sm-3">
                     {{ form_label(form.published, 'Publier l\'annonce', {'label_attr': {'class': 'control-label form-label'}}) }}
                     {{ form_errors(form.published) }}
                 </div>

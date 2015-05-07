@@ -18,7 +18,16 @@
                     </div>
                 {% endif %}
                 <div class="contenu_annonce">
-                    <p>{{ annonce.contenu }}</p>
+                    <p>{{ annonce.contenu|raw }}</p>
+                </div>
+                <div class="competences">
+                    {% if competences is defined %}
+                        <ul>
+                        {% for competence in competences %}
+                            <li>{{ competence.getCompetence.getNom }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
 

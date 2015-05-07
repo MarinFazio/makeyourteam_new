@@ -28,6 +28,11 @@ class Competence
      */
     private $nom;
 
+    /**
+     * @ORM\OneToMany(targetEntity="MYT\MakeYourTeamBundle\Entity\AnnonceCompetence", mappedBy="Competence", cascade={"persist"})
+     * */
+    protected $annonceCompetence;
+
 
     /**
      * Get id
