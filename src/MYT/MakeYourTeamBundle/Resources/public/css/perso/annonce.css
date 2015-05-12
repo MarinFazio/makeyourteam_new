@@ -1,0 +1,37 @@
+.img_annonce{
+    border: #000000;
+    margin: 20px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.contenu_annonce{
+    /*float: right;*/
+    margin-left: 25px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+img {
+    border:1px solid #021a40;
+}
+
+footer{
+    float: right;
+    margin-top: auto;
+    display: inline;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: right;
+
+}
+
+.competences{
+    margin: 20px;
+}
+
+.left{
+    float: left;
+}

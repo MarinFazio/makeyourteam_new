@@ -24,18 +24,20 @@ class ProfileController extends Controller
      */
     public function showAction($username = null)
     {
-//        $user = $this->getUser();
+        $user_connecte = $this->getUser();
         //On récupère l'utilisateur concerné //Username passé en GET
         $username = $_GET['username'];
         $em = $this->getDoctrine()->getManager();
-        $userRepository = $em->getRepository('UserBundle:User');
-        $user = $userRepository->findOneBy(array('username' => $username));
+        $userRepository = $em->getRepository('UserBundle:MyUser');
+//        $user = $userRepository->findOneBy(array('username' => $username));
+        $user = $userRepository->getUserByUsername($username);
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
         return $this->render('FOSUserBundle:Profile:show.html.twig', array(
-            'user' => $user
+            'user'          => $user,
+            'user_connecte' => $user_connecte,
         ));
     }
 

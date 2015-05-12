@@ -80,7 +80,7 @@ stof_doctrine_extensions:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: MYT\MakeYourTeamBundle\Entity\User
+    user_class: MYT\MakeYourTeamBundle\Entity\MyUser
     registration:
         form:
             type: myt_user_registration

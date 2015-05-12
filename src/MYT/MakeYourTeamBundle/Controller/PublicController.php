@@ -4,7 +4,7 @@ namespace MYT\MakeYourTeamBundle\Controller;
 
 use MYT\MakeYourTeamBundle\Entity\Annonce;
 use MYT\MakeYourTeamBundle\Entity\Image;
-use MYT\MakeYourTeamBundle\Entity\User;
+use MYT\MakeYourTeamBundle\Entity\MyUser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;

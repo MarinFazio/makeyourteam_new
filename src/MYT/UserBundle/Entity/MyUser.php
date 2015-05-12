@@ -1,17 +1,17 @@
 <?php
 
-namespace MYT\MakeYourTeamBundle\Entity;
+namespace MYT\UserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class User
+ * Class MyUser
  * @ORM\Entity
- * @ORM\Table(name="myt_user")
  * @ORM\Entity(repositoryClass="MYT\UserBundle\Entity\UserRepository")
  */
-class User extends BaseUser{
+//* @ORM\Table(name="myt_user")
+class MyUser extends BaseUser{
 
     /**
      * @ORM\Id
