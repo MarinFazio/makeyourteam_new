@@ -1,0 +1,86 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Modifier mon profil{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+    '@MakeYourTeamBundle/Resources/public/css/perso/form_style.css'
+    filter= 'cssrewrite'%}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+    <a href="{{ path('home') }}">Retourner à l'accueil</a>
+    <br/><br/>
+    <div class="formulaire">
+    <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'control-label form-label'}}) }}
+                {{ form_errors(form.email) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez votre adresse email'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+                {{ form_label(form.username, 'Nom d\'utilisateur', {'label_attr': {'class': 'control-label form-label'}}) }}
+                {{ form_errors(form.username) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez votre nom d\'utilisateur'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+                {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'control-label form-label'}}) }}
+                {{ form_errors(form.nom) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Votre nom'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+                {{ form_label(form.prenom, 'Prénom', {'label_attr': {'class': 'control-label form-label'}}) }}
+                {{ form_errors(form.prenom) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Votre prenom'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+                {{ form_label(form.age, 'Âge', {'label_attr': {'class': 'control-label form-label'}}) }}
+                {{ form_errors(form.age) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.age, {'attr': {'class': 'form-control', 'placeholder': 'Votre age'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+                {{ form_label(form.current_password, 'Mot de passe', {'label_attr': {'class': 'control-label form-label'}}) }}
+                {{ form_errors(form.current_password) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.current_password, {'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}}) }}
+            </div>
+        </div>
+
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="{{ 'Valider'|trans }}" class="btn btn-primary"/>
+        </div>
+
+    </form>
+    </div>
+{% endblock %}

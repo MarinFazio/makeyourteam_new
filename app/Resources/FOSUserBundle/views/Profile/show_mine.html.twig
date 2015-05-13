@@ -1,13 +1,13 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}{% if user_connecte is not null %}{% if user.username == user_connecte.username %}Mon profil{% endif %}{% else %}Profil de {{ user.username }}{% endif %}{% endblock %}
+{% block title %}Mon profil{% endblock %}
 
 {% block body %}
 
-    <h1>{% if user_connecte is not null %}{% if user.username == user_connecte.username %}Mon profil{% endif %}{% else %}Profil de {{ user.username }}{% endif %}</h1>
+    <h1>Mon profil</h1>
     <br/>
     <a href="{{ path('home') }}">Retourner à l'accueil</a>
-    {% if user_connecte is not null %}{% if user.username == user_connecte.username %}<a href="{{ path('fos_user_profile_edit') }}">Modifier mon profil</a>{% endif %}{% endif %}
+    <a href="{{ path('fos_user_profile_edit') }}">Modifier mon profil</a>
 
     <br/>
     <div class="id_user">

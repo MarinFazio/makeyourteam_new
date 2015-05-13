@@ -1,11 +1,11 @@
 <?php
 
-namespace MYT\MakeYourTeamBundle\Form\Type;
+namespace MYT\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class RegistrationFormType extends AbstractType
+class ProfileFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -16,11 +16,11 @@ class RegistrationFormType extends AbstractType
 
     public function getParent()
     {
-        return 'fos_user_registration';
+        return 'fos_user_profile';
     }
 
     public function getName()
     {
-        return 'myt_user_registration';
+        return 'myt_user_profile';
     }
 }

@@ -7,6 +7,8 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Model\UserInterface;
+use MYT\UserBundle\Form\Type\ProfileFormType;
+use MYT\UserBundle\Form\Type\RegistrationFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -26,18 +28,23 @@ class ProfileController extends Controller
     {
         $user_connecte = $this->getUser();
         //On récupère l'utilisateur concerné //Username passé en GET
-        $username = $_GET['username'];
+        if(isset($_GET['username'])){
+            $username = $_GET['username'];
+        }
         $em = $this->getDoctrine()->getManager();
         $userRepository = $em->getRepository('UserBundle:MyUser');
-//        $user = $userRepository->findOneBy(array('username' => $username));
-        $user = $userRepository->getUserByUsername($username);
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
+        if(isset($username)){
+            $user = $userRepository->getUserByUsername($username);
+            if (!is_object($user) || !$user instanceof UserInterface) {
+                throw new AccessDeniedException('This user does not have access to this section.');
+            }
+            return $this->render('FOSUserBundle:Profile:show.html.twig', array(
+                'user'          => $user,
+                'user_connecte' => $user_connecte,
+            ));
         }
-
-        return $this->render('FOSUserBundle:Profile:show.html.twig', array(
-            'user'          => $user,
-            'user_connecte' => $user_connecte,
+        return $this->render('FOSUserBundle:Profile:show_mine.html.twig', array(
+            'user' => $user_connecte,
         ));
     }
 
@@ -64,7 +71,8 @@ class ProfileController extends Controller
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->get('fos_user.profile.form.factory');
 
-        $form = $formFactory->createForm();
+//        $form = $formFactory->createForm();
+        $form = $this->createForm(new ProfileFormType());
         $form->setData($user);
 
         $form->handleRequest($request);
@@ -88,7 +96,7 @@ class ProfileController extends Controller
             return $response;
         }
 
-        return $this->render('FOSUserBundle:Profile:edit.html.twig', array(
+        return $this->render('FOSUserBundle:Profile:edit_profile.html.twig', array(
             'form' => $form->createView()
         ));
     }

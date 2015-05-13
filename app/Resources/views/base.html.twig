@@ -64,7 +64,8 @@
 
         {% block body %}{% endblock %}
         {% block javascripts %}
-            {% javascripts '@MakeYourTeamBundle/Resources/public/js/*' %}
+            {% javascripts '@MakeYourTeamBundle/Resources/public/js/*'
+                           '@MakeYourTeamBundle/Resources/public/js/perso/*' %}
                 <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
