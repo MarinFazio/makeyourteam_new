@@ -374,4 +374,38 @@ class Annonce
         return $this->annonceCompetence->removeElement($annonceCompetence);
     }
 
+
+    /**
+     * Add annonceCompetence
+     *
+     * @param \MYT\MakeYourTeamBundle\Entity\AnnonceCompetence $annonceCompetence
+     *
+     * @return Annonce
+     */
+    public function addAnnonceCompetence(\MYT\MakeYourTeamBundle\Entity\AnnonceCompetence $annonceCompetence)
+    {
+        $this->annonceCompetence[] = $annonceCompetence;
+
+        return $this;
+    }
+
+    /**
+     * Remove annonceCompetence
+     *
+     * @param \MYT\MakeYourTeamBundle\Entity\AnnonceCompetence $annonceCompetence
+     */
+    public function removeAnnonceCompetence(\MYT\MakeYourTeamBundle\Entity\AnnonceCompetence $annonceCompetence)
+    {
+        $this->annonceCompetence->removeElement($annonceCompetence);
+    }
+
+    /**
+     * Get annonceCompetence
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAnnonceCompetence()
+    {
+        return $this->annonceCompetence;
+    }
 }

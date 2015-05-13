@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="MYT\MakeYourTeamBundle\Entity\CompetenceRepository")
  */
-class Competence
-{
+class Competence{
+
     /**
      * @var integer
      *
@@ -28,16 +28,11 @@ class Competence
      */
     private $nom;
 
-    /**
-     * @ORM\OneToMany(targetEntity="MYT\MakeYourTeamBundle\Entity\AnnonceCompetence", mappedBy="Competence", cascade={"persist"})
-     * */
-    protected $annonceCompetence;
-
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -48,6 +43,7 @@ class Competence
      * Set nom
      *
      * @param string $nom
+     *
      * @return Competence
      */
     public function setNom($nom)
@@ -60,7 +56,7 @@ class Competence
     /**
      * Get nom
      *
-     * @return string 
+     * @return string
      */
     public function getNom()
     {

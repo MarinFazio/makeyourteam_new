@@ -1,4 +1,18 @@
-{% block fos_user_content %}
+{% extends '::base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+    '@MakeYourTeamBundle/Resources/public/css/perso/form_style.css'
+    filter= 'cssrewrite'%}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+    <a href="{{ path('home') }}">Retourner à l'accueil</a><br/><br/>
     <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
 
         <div class="form-group form-field">
@@ -7,7 +21,7 @@
                 {{ form_errors(form.email) }}
             </div>
             <div class="col-sm-4">
-                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez votre adresse email'}}) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Adresse email'}}) }}
             </div>
         </div>
 
@@ -17,7 +31,7 @@
                 {{ form_errors(form.username) }}
             </div>
             <div class="col-sm-4">
-                {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez votre nom d\'utilisateur'}}) }}
+                {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'Nom d\'utilisateur'}}) }}
             </div>
         </div>
 
@@ -27,7 +41,7 @@
                 {{ form_errors(form.plainPassword.first) }}
             </div>
             <div class="col-sm-4">
-                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez votre mot de passe'}}) }}
+                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}}) }}
             </div>
         </div>
 
@@ -73,7 +87,7 @@
 
         {{ form_widget(form) }}
         <div>
-            <input type="submit" value="{{ 'Valider'|trans }}" />
+            <input type="submit" value="{{ 'Valider'|trans }}" class="btn btn-primary" />
         </div>
     </form>
 {% endblock %}

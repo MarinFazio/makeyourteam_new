@@ -33,18 +33,33 @@ class ProfileController extends Controller
         }
         $em = $this->getDoctrine()->getManager();
         $userRepository = $em->getRepository('UserBundle:MyUser');
+        $user_competence_repository = $em->getRepository('MakeYourTeamBundle:MyUserCompetence');
+        $competence_repository = $em->getRepository('MakeYourTeamBundle:Competence');
+
+//        var_dump($competence_repository->find(3));
         if(isset($username)){
             $user = $userRepository->getUserByUsername($username);
+            $competences = $user_competence_repository->findByUser($user);
             if (!is_object($user) || !$user instanceof UserInterface) {
                 throw new AccessDeniedException('This user does not have access to this section.');
             }
             return $this->render('FOSUserBundle:Profile:show.html.twig', array(
                 'user'          => $user,
                 'user_connecte' => $user_connecte,
+                'competences'   => $competences,
             ));
         }
+
+        $competences = $user_competence_repository->findByUser($user_connecte);
+        foreach($competences as $uc){
+            $competence = $uc->getCompetence();
+            $competence = $competence_repository->find($competence->getId());
+            var_dump($competence);die;
+        }
+
         return $this->render('FOSUserBundle:Profile:show_mine.html.twig', array(
-            'user' => $user_connecte,
+            'user'        => $user_connecte,
+            'competences' => $competences,
         ));
     }
 

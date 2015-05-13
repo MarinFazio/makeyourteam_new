@@ -1,6 +1,6 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}{% if user_connecte is not null %}{% if user.username == user_connecte.username %}Mon profil{% endif %}{% else %}Profil de {{ user.username }}{% endif %}{% endblock %}
+{% block title %}{% if user_connecte is not null %}{% if user.username == user_connecte.username %}Mon profil{% else %}Profil de {{ user.username }}{% endif %}{% else %}Profil de {{ user.username }}{% endif %}{% endblock %}
 
 {% block body %}
 
@@ -16,15 +16,22 @@
     </div>
 
     <div id="photo_profil">
-        <img src="" alt="Photo non disponible"/>
+        <img src="../../../../../src/MYT/MakeYourTeamBundle/Resources/public/img/visu_non_dispo.jpg" alt="Photo non disponible"/>
     </div>
 
     <div id="mes_competences">
-        <h3>Mes Compétences</h3>
+        <h3>Compétences</h3>
+        {% if competences is not null %}
+            <div class="competences_user">
+                {% for user_competence in competences %}
+                    <p>{{ user_competence.competence.nom }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 
     <div id="ma_description">
-        <h3>Ma Description</h3>
+        <h3>Description</h3>
     </div>
 
 {% endblock %}
