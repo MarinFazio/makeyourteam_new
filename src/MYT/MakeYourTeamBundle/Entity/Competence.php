@@ -28,6 +28,11 @@ class Competence{
      */
     private $nom;
 
+    /**
+     * @ORM\OneToMany(targetEntity="MYT\MakeYourTeamBundle\Entity\MyUserCompetence", mappedBy="competence")
+     */
+    protected $myuser_competences;
+
 
     /**
      * Get id
@@ -61,5 +66,48 @@ class Competence{
     public function getNom()
     {
         return $this->nom;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->myuser_competences = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add myuserCompetence
+     *
+     * @param \MYT\MakeYourTeamBundle\Entity\MyUserCompetence $myuserCompetence
+     *
+     * @return Competence
+     */
+    public function addMyuserCompetence(\MYT\MakeYourTeamBundle\Entity\MyUserCompetence $myuserCompetence)
+    {
+        $this->myuser_competences[] = $myuserCompetence;
+        $myuserCompetence->setCompetence($this); //relation bidirectionnelle
+        return $this;
+    }
+
+    /**
+     * Remove myuserCompetence
+     *
+     * @param \MYT\MakeYourTeamBundle\Entity\MyUserCompetence $myuserCompetence
+     */
+    public function removeMyuserCompetence(\MYT\MakeYourTeamBundle\Entity\MyUserCompetence $myuserCompetence)
+    {
+        $this->myuser_competences->removeElement($myuserCompetence);
+        //relation bidirectionnelle
+        $myuserCompetence->setCompetence(null);
+    }
+
+    /**
+     * Get myuserCompetences
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMyuserCompetences()
+    {
+        return $this->myuser_competences;
     }
 }

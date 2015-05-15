@@ -38,6 +38,11 @@ class MyUser extends BaseUser{
      */
     protected $age;
 
+    /**
+     * @ORM\OneToMany(targetEntity="MYT\MakeYourTeamBundle\Entity\MyUserCompetence", mappedBy="user")
+     */
+    protected $myuser_competences;
+
     public function __construct()
     {
         parent::__construct();
@@ -74,5 +79,41 @@ class MyUser extends BaseUser{
     {
         $this->age = $age;
         return $this;
+    }
+
+    /**
+     * Add myuserCompetence
+     *
+     * @param \MYT\MakeYourTeamBundle\Entity\MyUserCompetence $myuserCompetence
+     *
+     * @return MyUser
+     */
+    public function addMyuserCompetence(\MYT\MakeYourTeamBundle\Entity\MyUserCompetence $myuserCompetence)
+    {
+        $this->myuser_competences[] = $myuserCompetence;
+        $myuserCompetence->setUser($this);//relation bidirectionnelle
+        return $this;
+    }
+
+    /**
+     * Remove myuserCompetence
+     *
+     * @param \MYT\MakeYourTeamBundle\Entity\MyUserCompetence $myuserCompetence
+     */
+    public function removeMyuserCompetence(\MYT\MakeYourTeamBundle\Entity\MyUserCompetence $myuserCompetence)
+    {
+        $this->myuser_competences->removeElement($myuserCompetence);
+        //relation bidirectionnelle
+        $myuserCompetence->setUser(null);
+    }
+
+    /**
+     * Get myuserCompetences
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMyuserCompetences()
+    {
+        return $this->myuser_competences;
     }
 }

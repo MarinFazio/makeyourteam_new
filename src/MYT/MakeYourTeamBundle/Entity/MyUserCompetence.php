@@ -13,13 +13,13 @@ class MyUserCompetence{
 
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="MYT\MakeYourTeamBundle\Entity\MyUser")
+     * @ORM\ManyToOne(targetEntity="MYT\MakeYourTeamBundle\Entity\MyUser", inversedBy="myuser_competences")
      */
     private $user;
 
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="MYT\MakeYourTeamBundle\Entity\Competence")
+     * @ORM\ManyToOne(targetEntity="MYT\MakeYourTeamBundle\Entity\Competence", inversedBy="myuser_competences")
      */
     private $competence;
 
