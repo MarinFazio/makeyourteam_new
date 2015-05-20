@@ -4,6 +4,7 @@ namespace MYT\MakeYourTeamBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Acl\Domain\DoctrineAclCache;
 
 /**
  * Class MyUser
@@ -39,7 +40,7 @@ class MyUser extends BaseUser{
     protected $age;
 
     /**
-     * @ORM\OneToMany(targetEntity="MYT\MakeYourTeamBundle\Entity\MyUserCompetence", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="MYT\MakeYourTeamBundle\Entity\MyUserCompetence", mappedBy="user",cascade={"persist"})
      */
     protected $myuser_competences;
 

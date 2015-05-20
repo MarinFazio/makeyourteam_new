@@ -7,7 +7,6 @@ use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
-use MYT\MakeYourTeamBundle\Entity\MyUserCompetence;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -15,12 +14,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
 
-/**
- * Controller managing the registration
- *
- * @author Thibault Duplessis <thibault.duplessis@gmail.com>
- * @author Christophe Coevoet <stof@notk.org>
- */
+
 class RegistrationController extends Controller
 {
     public function registerAction(Request $request)
@@ -46,7 +40,6 @@ class RegistrationController extends Controller
         $form->setData($user);
 
         $form->handleRequest($request);
-
         if ($form->isValid()) {
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
@@ -57,19 +50,6 @@ class RegistrationController extends Controller
                 $url = $this->generateUrl('fos_user_registration_confirmed');
                 $response = new RedirectResponse($url);
             }
-
-            $em = $this->getDoctrine()->getManager();
-            $liste_competences = $em->getRepository('MakeYourTeamBundle:Competence')->findAll();
-
-            foreach($liste_competences as $i => $competence){
-                $userCompetence[$i] = new MyUserCompetence();
-                $userCompetence[$i]->setUser($user);
-                $userCompetence[$i]->setCompetence($competence);
-                $userCompetence[$i]->setNiveau('Senior');
-                $em->persist($userCompetence[$i]);
-            }
-            $em->flush();
-
 
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
