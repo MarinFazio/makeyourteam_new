@@ -6,6 +6,7 @@
     {{ parent() }}
     {% stylesheets
     '@MakeYourTeamBundle/Resources/public/css/perso/form_style.css'
+    '@MakeYourTeamBundle/Resources/public/css/perso/register.css'
     filter= 'cssrewrite'%}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
@@ -66,6 +67,18 @@
             </div>
         </div>
 
+        {#<div class="form-group form-field">#}
+            {#<div class="col-sm-3">#}
+                {#{{ form_label(form.myuser_competences, 'Compétence(s)', {'label_attr': {'class': 'control-label form-label'}}) }}#}
+                {#{{ form_errors(form.myuser_competences) }}#}
+            {#</div>#}
+            {#<div class="col-sm-4">#}
+                {#{{ form_widget(form.myuser_competences, {'attr': {'class': 'form-control'}}) }}#}
+            {#</div>#}
+        {#</div>#}
+
+        {#<br/>#}
+
         <div class="form-group form-field">
             <div class="col-sm-3">
                 {{ form_label(form.current_password, 'Mot de passe', {'label_attr': {'class': 'control-label form-label'}}) }}
@@ -76,6 +89,8 @@
             </div>
         </div>
 
+        <br/><br/>
+
         {{ form_widget(form) }}
         <div>
             <input type="submit" value="{{ 'Valider'|trans }}" class="btn btn-primary"/>
@@ -83,4 +98,71 @@
 
     </form>
     </div>
+
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+            var $container = $('div#fos_user_profile_form_myuser_competences');
+
+            // On ajoute un lien pour ajouter une nouvelle catégorie
+            var $lienAjout = $('<a href="#" id="ajout_competence" class="btn">Ajouter une compétence</a>');
+            $container.append($lienAjout);
+
+            // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+            $lienAjout.click(function(e) {
+                ajouterCompetence($container);
+                e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                return false;
+            });
+
+            // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+            var index = $container.find(':input').length;
+
+            // On ajoute un premier champ directement s'il n'en existe pas déjà un (cas d'un nouvel article par exemple).
+            if (index == 0) {
+                ajouterCompetence($container);
+            } else {
+                // Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+                $container.children('div').each(function() {
+                    ajouterLienSuppression($(this));
+                });
+            }
+
+            // La fonction qui ajoute un formulaire Categorie
+            function ajouterCompetence($container) {
+                // Dans le contenu de l'attribut « data-prototype », on remplace :
+                // - le texte "__name__label__" qu'il contient par le label du champ
+                // - le texte "__name__" qu'il contient par le numéro du champ
+                var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Nouvelle compétence' + (index+1))
+                        .replace(/__name__/g, index)).addClass('categorie');
+
+                // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+                ajouterLienSuppression($prototype);
+
+                // On ajoute le prototype modifié à la fin de la balise <div>
+                $container.append($prototype);
+
+                // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+                index++;
+            }
+
+            // La fonction qui ajoute un lien de suppression d'une Competence
+            function ajouterLienSuppression($prototype) {
+                // Création du lien
+                $lienSuppression = $('<a href="#" class="btn btn-danger supprimer">Supprimer</a>');
+
+                // Ajout du lien
+                $prototype.append($lienSuppression);
+
+                // Ajout du listener sur le clic du lien
+                $lienSuppression.click(function(e) {
+                    $prototype.remove();
+                    e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                    return false;
+                });
+            }
+        });
+    </script>
 {% endblock %}

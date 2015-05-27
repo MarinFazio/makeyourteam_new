@@ -36,7 +36,6 @@ class ProfileController extends Controller
         $user_competence_repository = $em->getRepository('MakeYourTeamBundle:MyUserCompetence');
         $competence_repository = $em->getRepository('MakeYourTeamBundle:Competence');
 
-//        var_dump($competence_repository->find(3));
         if(isset($username)){
             $user = $userRepository->getUserByUsername($username);
             $competences = $user_competence_repository->findByUser($user);
@@ -54,7 +53,6 @@ class ProfileController extends Controller
         foreach($competences as $uc){
             $competence = $uc->getCompetence();
             $competence = $competence_repository->find($competence->getId());
-            var_dump($competence);die;
         }
 
         return $this->render('FOSUserBundle:Profile:show_mine.html.twig', array(
@@ -86,8 +84,8 @@ class ProfileController extends Controller
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->get('fos_user.profile.form.factory');
 
-//        $form = $formFactory->createForm();
-        $form = $this->createForm(new ProfileFormType());
+        $form = $formFactory->createForm();
+//        $form = $this->createForm(new ProfileFormType());
         $form->setData($user);
 
         $form->handleRequest($request);

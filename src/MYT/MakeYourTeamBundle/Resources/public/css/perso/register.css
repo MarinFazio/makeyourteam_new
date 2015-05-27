@@ -1,0 +1,26 @@
+#ajout_competence{
+    position: absolute;
+    left: 0;
+    top: 575px;
+    max-width: 100px;
+}
+
+.supprimer{
+    margin-bottom: 25px;
+}
+
+#fos_user_registration_form_myuser_competences{
+    margin-left: 150px;
+}
+
+#fos_user_profile_form_myuser_competences{
+    margin-left: 160px;
+}
+
+#fos_user_registration_form_myuser_competences div{
+    /*margin-top: 25px;*/
+}
+
+#fos_user_profile_form_myuser_competences div{
+    /*margin-top: 25px;*/
+}

@@ -2,7 +2,6 @@
 
 namespace MYT\UserBundle\Form\Type;
 
-use MYT\MakeYourTeamBundle\Form\DataTransformer\ArrayToMyUserCompetenceTransformer;
 use MYT\MakeYourTeamBundle\Form\MyUserCompetenceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
