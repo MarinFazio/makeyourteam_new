@@ -52,10 +52,11 @@ class ProfileController extends Controller
         }
 
         $competences = $user_competence_repository->findByUser($user_connecte);
-        foreach($competences as $uc){
-            $competence = $uc->getCompetence();
-            $competence = $competence_repository->find($competence->getId());
-        }
+//        var_dump(\Doctrine\Common\Util\Debug::dump($competences));die;
+//        foreach($competences as $uc){
+//            $competence = $uc->getCompetence();
+//            $competence = $competence_repository->find($competence->getId());
+//        }
 
         return $this->render('FOSUserBundle:Profile:show_mine.html.twig', array(
             'user'        => $user_connecte,
@@ -142,9 +143,6 @@ class ProfileController extends Controller
             foreach($form->getData()['myuser_competences'] as $comp){
                 $comp->setUser($user);
             }
-//            var_dump(\Doctrine\Common\Util\Debug::dump($form->getData()['myuser_competences']));die;
-
-
             $em->flush();
 
             return $this->redirect($this->generateUrl('fos_user_profile_show'));

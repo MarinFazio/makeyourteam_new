@@ -1,0 +1,21 @@
+.competence_nom{
+    display: inline-block;
+    vertical-align: bottom;
+    min-width: 150px;
+}
+
+.competence_niveau{
+    display: inline-block;
+    vertical-align: bottom;
+    padding-left: 25px;
+}
+
+.mes_competences_titre{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.mes_competences_edit{
+    display: inline-block;
+    vertical-align: middle;
+}

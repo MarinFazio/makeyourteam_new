@@ -2,6 +2,15 @@
 
 {% block title %}{% if user_connecte is not null %}{% if user.username == user_connecte.username %}Mon profil{% else %}Profil de {{ user.username }}{% endif %}{% else %}Profil de {{ user.username }}{% endif %}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+    '@MakeYourTeamBundle/Resources/public/css/perso/profile.css'
+    filter= 'cssrewrite'%}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
 {% block body %}
 
     <h1>{% if user_connecte is not null %}{% if user.username == user_connecte.username %}Mon profil{% endif %}{% else %}Profil de {{ user.username }}{% endif %}</h1>
@@ -25,6 +34,8 @@
             <div class="competences_user">
                 {% for user_competence in competences %}
                     <p>{{ user_competence.competence.nom }}</p>
+                    <p class="competence_niveau">{{ user_competence.niveau|capitalize }}</p>
+                    <br/>
                 {% endfor %}
             </div>
         {% endif %}

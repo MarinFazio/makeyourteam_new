@@ -2,6 +2,15 @@
 
 {% block title %}Mon profil{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+    '@MakeYourTeamBundle/Resources/public/css/perso/profile.css'
+    filter= 'cssrewrite'%}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
 {% block body %}
 
     <h1>Mon profil</h1>
@@ -20,7 +29,16 @@
     </div>
 
     <div id="mes_competences">
-        <h3>Mes Compétences</h3> <a href="{{ path('fos_user_profile_edit_myusercompetences') }}">Modifier mes competences</a>
+        <h3 class="mes_competences_titre">Mes Compétences</h3>&nbsp;&nbsp;&nbsp;&nbsp;<a class="mes_competences_edit" href="{{ path('fos_user_profile_edit_myusercompetences') }}">Modifier mes competences</a>
+        {% if competences is not null %}
+            <div class="competences_user">
+                {% for user_competence in competences %}
+                    <p class="competence_nom" >{{ user_competence.competence.nom }}</p>
+                    <p class="competence_niveau">{{ user_competence.niveau|capitalize }}</p>
+                    <br/>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 
     <div id="ma_description">
