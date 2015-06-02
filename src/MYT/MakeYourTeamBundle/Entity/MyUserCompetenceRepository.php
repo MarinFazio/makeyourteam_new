@@ -13,4 +13,13 @@ use Doctrine\ORM\EntityRepository;
 class MyUserCompetenceRepository extends EntityRepository
 {
 
+    public function deleteByUser($user)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery(
+                'DELETE FROM MakeYourTeamBundle:MyUserCompetence u WHERE u.user = :myuser'
+            )->setParameter('myuser', $user);
+        $query->execute();
+    }
+
 }

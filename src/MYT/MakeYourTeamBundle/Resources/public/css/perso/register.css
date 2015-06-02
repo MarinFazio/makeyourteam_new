@@ -5,6 +5,13 @@
     max-width: 100px;
 }
 
+#myt_user_competences_myuser_competences #ajout_competence{
+    position: absolute;
+    left: 0;
+    top: 185px;
+    max-width: 100px;
+}
+
 .supprimer{
     margin-bottom: 25px;
 }
@@ -14,6 +21,10 @@
 }
 
 #fos_user_profile_form_myuser_competences{
+    margin-left: 160px;
+}
+
+#myt_user_competences_myuser_competences{
     margin-left: 160px;
 }
 

@@ -13,4 +13,8 @@
         <default key="_controller">MYTUserBundle:Profile:edit</default>
     </route>
 
+    <route id="fos_user_profile_edit_myusercompetences" pattern="/edit/competences">
+        <default key="_controller">MYTUserBundle:Profile:editMyUserCompetences</default>
+    </route>
+
 </routes>

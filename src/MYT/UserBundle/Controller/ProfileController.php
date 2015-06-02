@@ -7,6 +7,8 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Model\UserInterface;
+use MYT\MakeYourTeamBundle\Form\MyUserCompetencesType;
+use MYT\MakeYourTeamBundle\Form\MyUserCompetenceType;
 use MYT\UserBundle\Form\Type\ProfileFormType;
 use MYT\UserBundle\Form\Type\RegistrationFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -113,4 +115,46 @@ class ProfileController extends Controller
             'form' => $form->createView()
         ));
     }
+
+    public function editMyUserCompetencesAction(Request $request)
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $competences = array(
+            'myuser_competences' => $user->getMyuserCompetences()
+        );
+
+        $form = $this->createForm(new MyUserCompetencesType(), $competences);
+        $form->handleRequest($request);
+
+        if(!$form->isValid()){
+            $user_repository = $em->getRepository('MakeYourTeamBundle:MyUserCompetence');
+            $user_repository->deleteByUser($user);
+            $em->flush();
+        }
+
+        if($form->isValid()){
+            foreach($form->getData()['myuser_competences'] as $comp){
+                $comp->setUser($user);
+            }
+//            var_dump(\Doctrine\Common\Util\Debug::dump($form->getData()['myuser_competences']));die;
+
+
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('fos_user_profile_show'));
+        }
+
+        return $this->render('FOSUserBundle:Profile:edit_myusercompetences.html.twig', array(
+            'form' => $form->createView()
+        ));
+
+    }
+
+
 }

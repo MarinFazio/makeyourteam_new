@@ -27,3 +27,7 @@ annonce_delete:
 myt_annonce_show:
     pattern: /annonce/show-{slug}
     defaults: { _controller: MakeYourTeamBundle:Annonce:show }
+
+fos_user_profile_edit_myusercompetences:
+    path: /profile/edit-competences
+    defaults: { _controller: UserBundle:Profile:editMyUserCompetences }
