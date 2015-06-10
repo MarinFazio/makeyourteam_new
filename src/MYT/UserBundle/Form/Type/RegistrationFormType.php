@@ -20,7 +20,14 @@ class RegistrationFormType extends AbstractType
                                                             , array('type'        => new MyUserCompetenceType(),
                                                             'allow_add'           => true,
                                                             'allow_delete'        => true,
-                                                            )));
+                                                            )))
+            ->add('description', 'ckeditor', array(
+                'transformers'                 => array('html_purifier'),
+                'startup_outline_blocks'       => false,
+                'width'                        => '75%',
+                'height'                       => '250',
+                'language'                     => 'fr',
+            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

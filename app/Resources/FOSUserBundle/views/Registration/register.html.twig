@@ -96,7 +96,17 @@
             </div>
         </div>
 
-        <br/><br/><br/>
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+                {{ form_label(form.description, 'Ma description', {'label_attr': {'class': 'control-label form-label', 'placeholder': 'Mot de passe'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <br/><br/>
 
         {{ form_widget(form) }}
         <div>

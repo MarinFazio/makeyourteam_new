@@ -67,17 +67,15 @@
             </div>
         </div>
 
-        {#<div class="form-group form-field">#}
-            {#<div class="col-sm-3">#}
-                {#{{ form_label(form.myuser_competences, 'Compétence(s)', {'label_attr': {'class': 'control-label form-label'}}) }}#}
-                {#{{ form_errors(form.myuser_competences) }}#}
-            {#</div>#}
-            {#<div class="col-sm-4">#}
-                {#{{ form_widget(form.myuser_competences, {'attr': {'class': 'form-control'}}) }}#}
-            {#</div>#}
-        {#</div>#}
-
-        {#<br/>#}
+        <div class="form-group form-field">
+            <div class="col-sm-3">
+                {{ form_label(form.description, 'Ma description', {'label_attr': {'class': 'control-label form-label', 'placeholder': 'Mot de passe'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
 
         <div class="form-group form-field">
             <div class="col-sm-3">
@@ -94,6 +92,7 @@
         {{ form_widget(form) }}
         <div>
             <input type="submit" value="{{ 'Valider'|trans }}" class="btn btn-primary"/>
+            <a href="javascript:history.back()" class="btn">Annuler</a>
         </div>
 
     </form>

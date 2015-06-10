@@ -33,7 +33,7 @@
         {% if competences is not null %}
             <div class="competences_user">
                 {% for user_competence in competences %}
-                    <p>{{ user_competence.competence.nom }}</p>
+                    <p class="competence_nom">{{ user_competence.competence.nom }}</p>
                     <p class="competence_niveau">{{ user_competence.niveau|capitalize }}</p>
                     <br/>
                 {% endfor %}
@@ -43,6 +43,9 @@
 
     <div id="ma_description">
         <h3>Description</h3>
+        <div>
+            {{ user.description|raw }}
+        </div>
     </div>
 
 {% endblock %}

@@ -13,7 +13,14 @@ class ProfileFormType extends AbstractType
     {
         $builder->add('nom', 'text', array('label' => 'Nom'))
                 ->add('prenom', 'text', array('label' => 'Prénom'))
-                ->add('age', 'text', array('label' => 'Âge'));
+                ->add('age', 'text', array('label' => 'Âge'))
+                ->add('description', 'ckeditor', array(
+                    'transformers'                 => array('html_purifier'),
+                    'startup_outline_blocks'       => false,
+                    'width'                        => '75%',
+                    'height'                       => '250',
+                    'language'                     => 'fr',
+                ));
 //                ->add($builder->create('myuser_competences', 'collection',array(
 //                                                'type'          => new MyUserCompetenceType(),
 //                                                'allow_add'     => true,

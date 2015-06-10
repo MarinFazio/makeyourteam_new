@@ -40,6 +40,12 @@ class MyUser extends BaseUser{
     protected $age;
 
     /**
+     * @var string
+     * @ORM\Column(name="description", type="text")
+     */
+    protected $description;
+
+    /**
      * @ORM\OneToMany(targetEntity="MYT\MakeYourTeamBundle\Entity\MyUserCompetence", mappedBy="user",cascade={"persist"})
      */
     protected $myuser_competences;
@@ -116,5 +122,29 @@ class MyUser extends BaseUser{
     public function getMyuserCompetences()
     {
         return $this->myuser_competences;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return MyUser
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
