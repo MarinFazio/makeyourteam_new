@@ -13,17 +13,27 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class PublicController extends Controller
 {
 
-    public function indexAction($lastUsername = null, $error = null)
+    public function indexAction($page=1, $lastUsername = null, $error = null)
     {
         $em = $this->getDoctrine()->getManager();
         $annonceRepository = $em->getRepository('MakeYourTeamBundle:Annonce');
 
-//        $annonce = $annonceRepository->find(8);
 
-//        $listCompetenceAnnonce = $em->getRepository("MakeYourTeamBundle:AnnonceCompetence")->findBy(array('annonce' => $annonce));
+        $maxAnnonces = 1;
+        $nb_annonces = $annonceRepository->countPublishedTotal();
+        $pagination = array(
+            'page'          => $page,
+            'route'         => 'annonce_page',
+            'nb_pages'      => ceil($nb_annonces[1] / $maxAnnonces),
+            'route_params'  => array()
+        );
 
-        $annonces = $annonceRepository->findAll();
+        $annonces = $this->getDoctrine()->getRepository('MakeYourTeamBundle:Annonce')
+            ->getList($page, $maxAnnonces);
 
+//        var_dump($pagination);die;
+
+//        $annonces = $annonceRepository->getPublishedAnnonces();
         $lastIndex = @array_pop(array_keys($annonces));
 
         $user = $this->getUser();
@@ -41,6 +51,7 @@ class PublicController extends Controller
             'last_username'     => $lastUsername,
             'error'             => $error,
             'lastIndex'         => $lastIndex,
+            'pagination'        => $pagination,
         ));
 
     }

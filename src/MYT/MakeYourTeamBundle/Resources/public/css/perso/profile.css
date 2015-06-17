@@ -19,3 +19,11 @@
     display: inline-block;
     vertical-align: middle;
 }
+
+a.edit_annonce{
+    margin-left: 50px;
+}
+
+/*a.delete_annonce{*/
+    /*margin-left: 50px;*/
+/*}*/

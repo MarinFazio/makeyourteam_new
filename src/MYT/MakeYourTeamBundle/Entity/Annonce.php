@@ -87,9 +87,9 @@ class Annonce
      */
     private $slug;
 
-    /**
-     * @ORM\OneToMany(targetEntity="MYT\MakeYourTeamBundle\Entity\AnnonceCompetence", mappedBy="Annonce", cascade={"persist"})
-     * */
+//    /**
+//     * @ORM\OneToMany(targetEntity="MYT\MakeYourTeamBundle\Entity\AnnonceCompetence", mappedBy="Annonce", cascade={"persist"})
+//     */
     protected $annonceCompetence;
 
     protected $competences;
@@ -343,9 +343,9 @@ class Annonce
     {
         $competences = new ArrayCollection();
 
-        foreach ($this->annonceCompetence as $ac) {
-            $competences[] = $ac->getCompetence();
-        }
+//        foreach ($this->annonceCompetence as $ac) {
+//            $competences[] = $ac->getCompetence();
+//        }
 
         return $competences;
     }

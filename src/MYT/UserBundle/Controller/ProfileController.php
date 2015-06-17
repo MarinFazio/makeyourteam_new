@@ -37,6 +37,7 @@ class ProfileController extends Controller
         $userRepository = $em->getRepository('UserBundle:MyUser');
         $user_competence_repository = $em->getRepository('MakeYourTeamBundle:MyUserCompetence');
         $competence_repository = $em->getRepository('MakeYourTeamBundle:Competence');
+        $annonce_repository = $em->getRepository('MakeYourTeamBundle:Annonce');
 
         if(isset($username)){
             $user = $userRepository->getUserByUsername($username);
@@ -52,15 +53,19 @@ class ProfileController extends Controller
         }
 
         $competences = $user_competence_repository->findByUser($user_connecte);
+        $annonce = null;
+        $annonce = $annonce_repository->findByAuteur($user_connecte->getUsername());
+
 //        var_dump(\Doctrine\Common\Util\Debug::dump($competences));die;
 //        foreach($competences as $uc){
 //            $competence = $uc->getCompetence();
 //            $competence = $competence_repository->find($competence->getId());
 //        }
-
+//        \Doctrine\Common\Util\Debug::dump($annonce);die;
         return $this->render('FOSUserBundle:Profile:show_mine.html.twig', array(
             'user'        => $user_connecte,
             'competences' => $competences,
+            'annonce'     => $annonce,
         ));
     }
 

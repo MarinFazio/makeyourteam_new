@@ -1,10 +1,10 @@
-{% extends '::base.html.twig' %}
+{% extends "::base.html.twig" %}
 
 {% block title %}Modifier une annonce{% endblock %}
 
 {% block stylesheets %}
+    {{ parent() }}
     {% stylesheets
-    '@MakeYourTeamBundle/Resources/public/css/bootstrap/*'
     '@MakeYourTeamBundle/Resources/public/css/perso/form_style.css'
     filter= 'cssrewrite'%}
     <link rel="stylesheet" href="{{ asset_url }}"/>
@@ -52,11 +52,11 @@
 
         <div class="form-group form-field">
             <div class="col-sm-3">
-                {{ form_label(form.competences, 'Choisir des compétences', {'label_attr': {'class': 'control-label form-label'}}) }}
-                {{ form_errors(form.competences) }}
+                {{ form_label(form.competence, 'Choisir des compétences', {'label_attr': {'class': 'control-label form-label'}}) }}
+                {{ form_errors(form.competence) }}
             </div>
             <div class="col-sm-4">
-                {{ form_widget(form.competences, {'attr': {'class': 'form-control'}}) }}
+                {{ form_widget(form.competence, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
 

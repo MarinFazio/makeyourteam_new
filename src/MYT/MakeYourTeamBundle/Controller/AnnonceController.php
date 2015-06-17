@@ -78,7 +78,6 @@ class AnnonceController extends Controller
         if($annonce === null){
             throw new NotFoundHttpException("L'annonce de slug $slug n'existe pas");
         }
-
         $form = $this->createForm(new AnnonceType(), $annonce);
         $form->handleRequest($request);
         if($form->isValid()){
@@ -93,6 +92,7 @@ class AnnonceController extends Controller
 
             return $this->redirect($this->generateUrl('home'));
         }
+
         return $this->render("MakeYourTeamBundle:Annonce:edit.html.twig", array(
             'form' => $form->createView(),
             'user' => $user,

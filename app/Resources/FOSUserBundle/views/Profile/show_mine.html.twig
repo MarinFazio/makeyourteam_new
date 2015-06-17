@@ -47,5 +47,14 @@
             {{ user.description|raw }}
         </div>
     </div>
+    <div id="mon_annonce">
+        {% if annonce is not null %}
+            <h3>Mon annonce</h3>
+            {% for a in annonce %}
+                <a href="{{ path('myt_annonce_show', {'slug': a.slug}) }}">{{ a.titre }}</a><a href="{{ path('annonce_edit', {'slug': a.slug}) }}" class="edit_annonce">Modifier</a>
+                &nbsp;&nbsp;<a class="delete_annonce" href="{{ path('annonce_delete', {'id': a.id}) }}">Supprimer</a>
+            {% endfor %}
+        {% endif %}
+    </div>
 
 {% endblock %}

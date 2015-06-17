@@ -4,7 +4,7 @@ home:
 
 annonce_page:
     pattern: /page-{page}
-    defaults: { _controller: MakeYourTeamBundle:Annonce:page }
+    defaults: { _controller: MakeYourTeamBundle:Public:index, page: 1 }
     requirements:
         page: \d
 

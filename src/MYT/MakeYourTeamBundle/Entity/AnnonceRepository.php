@@ -3,6 +3,7 @@
 namespace MYT\MakeYourTeamBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * AnnonceRepository
@@ -20,6 +21,51 @@ class AnnonceRepository extends EntityRepository
         $qb->where($qb->expr()->in('c.nom', $catagories));
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function getPublishedAnnonces()
+    {
+        $query = $this->getEntityManager()
+            ->createQuery(
+                'SELECT a FROM MakeYourTeamBundle:Annonce a WHERE a.published = true'
+            );
+
+
+        return $query->getResult();
+    }
+
+    public function getAnnonceBySlug($slug)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery(
+                'SELECT a FROM MakeYourTeamBundle:Annonce a WHERE a.slug = :slug'
+            )->setParameter('slug', $slug);
+
+
+        return $query->getFirstResult();
+    }
+
+    public function getList($page=1, $maxperpage=1)
+    {
+        $qb = $this->_em->createQueryBuilder()
+            ->select('a')
+            ->from('MakeYourTeamBundle:Annonce','a')
+        ;
+
+        $qb->setFirstResult(($page-1) * $maxperpage)
+            ->setMaxResults($maxperpage);
+
+        return new Paginator($qb);
+    }
+
+    public function countPublishedTotal()
+    {
+        $query = $this->getEntityManager()
+            ->createQuery(
+                'SELECT COUNT(a) FROM MakeYourTeamBundle:Annonce a WHERE a.published = true'
+            );
+
+        return $query->getOneOrNullResult();
     }
 
 
