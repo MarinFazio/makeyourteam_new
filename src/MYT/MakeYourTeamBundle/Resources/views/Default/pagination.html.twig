@@ -1,23 +1,27 @@
 <div class="pagination">
     <div class="pagination-buttons">
         {% if pagination.page>1 %}
-            <a href="{{ path(pagination.route,
-            pagination.route_params|merge({'page': 1})) }}"><<</a>
-            <a href="{{ path(pagination.route,
-            pagination.route_params|merge({'page': pagination.page-1})) }}"><</a>
+            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': 1})) }}" ><<</a>
+            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page-1})) }}"><</a>
+        {% else %}
+            <span class="inactive"><<</span>
+            <span class="inactive"><</span>
         {% endif %}
         {#display p numbers only from p-4 to p+4 but don't go <1 or >pages_count#}
         {% for p in range(max(pagination.page-4, 1),
         min(pagination.page+4, pagination.nb_pages)) %}
-            <a{% if p == pagination.page %} class="current-page"{% endif %}
-                    href="{{ path(pagination.route,
-                    pagination.route_params|merge({'page': p})) }}">{{ p }}</a>
+        {% if p == pagination.page %}
+            <span class="current-page">{{ p }}</span>
+        {% else %}
+            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': p})) }}">{{ p }}</a>
+        {% endif %}
         {% endfor %}
         {% if pagination.page<pagination.nb_pages %}
-            <a href="{{ path(pagination.route,
-            pagination.route_params|merge({'page': pagination.page+1})) }}">></a>
-            <a href="{{ path(pagination.route,
-            pagination.route_params|merge({'page': pagination.nb_pages})) }}">>></a>
+            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page+1})) }}">></a>
+            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.nb_pages})) }}">>></a>
+        {% else %}
+            <span class="inactive">>></span>
+            <span class="inactive">></span>
         {% endif %}
     </div>
 </div>

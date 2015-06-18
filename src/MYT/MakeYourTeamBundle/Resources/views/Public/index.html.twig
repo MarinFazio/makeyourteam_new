@@ -2,6 +2,15 @@
 
 {% block title %}Accueil{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+    '@MakeYourTeamBundle/Resources/public/css/perso/pagination.css'
+    filter= 'cssrewrite'%}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
 {% block body %}
     <h1>Accueil</h1>
 
